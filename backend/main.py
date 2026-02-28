@@ -11,7 +11,7 @@ load_dotenv()
 
 app = FastAPI()
 
-# Configuración CORS
+# CORS Configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -26,7 +26,7 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 @app.post("/analyze")
 async def analyze_dicom_file(file: UploadFile = File(...)):
     """
-    Endpoint para cargar un archivo DICOM, procesarlo con AI y validarlo.
+    Endpoint to upload a DICOM file, process it with AI, and validate it.
     """
     file_path = os.path.join(UPLOAD_DIR, file.filename)
 
@@ -34,16 +34,16 @@ async def analyze_dicom_file(file: UploadFile = File(...)):
         shutil.copyfileobj(file.file, buffer)
 
     try:
-        # 1. Extraer Metadatos y convertir imagen
+        # 1. Extract Metadata and convert image
         metadata, img_base64 = process_dicom(file_path)
 
-        # 2. IA genera el reporte (Groq Llama 3.2 Vision)
+        # 2. AI generates the report (Groq Llama Vision)
         report = analyze_metadata_and_image(metadata, img_base64)
 
         # 3. Guardrails
         is_valid, message = validate_report(report)
         if not is_valid:
-            raise HTTPException(status_code=422, detail=f"Guardrail fallido: {message}")
+            raise HTTPException(status_code=422, detail=f"Guardrail failed: {message}")
 
         return {
             "metadata": metadata,
@@ -53,7 +53,7 @@ async def analyze_dicom_file(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     finally:
-        # Opcionalmente eliminar archivo local después de procesar
+        # Optionally remove local file after processing
         if os.path.exists(file_path):
             os.remove(file_path)
 

@@ -6,7 +6,7 @@ import base64
 
 def process_dicom(file_path):
     """
-    Extrae metadatos y convierte la imagen DICOM a Base64 para el LLM.
+    Extracts metadata and converts the DICOM image to Base64 for the LLM.
     """
     ds = pydicom.dcmread(file_path)
 
@@ -18,10 +18,10 @@ def process_dicom(file_path):
         "StudyDate": str(ds.get("StudyDate", "Unknown")),
     }
 
-    # Convertir a imagen (suponiendo que es escala de grises estándar)
+    # Convert to image (assuming standard grayscale)
     pixel_array = ds.pixel_array
 
-    # Normalización básica
+    # Basic normalization
     pixel_array = pixel_array.astype(float)
     rescaled = (np.maximum(pixel_array, 0) / pixel_array.max()) * 255.0
     rescaled = np.uint8(rescaled)

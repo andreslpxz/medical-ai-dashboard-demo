@@ -24,14 +24,14 @@ function App() {
         {!analysisResult ? (
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-10">
-              <h1 className="text-4xl font-extrabold text-gray-900 mb-4">Análisis Radiológico con IA</h1>
-              <p className="text-lg text-gray-600">Sube archivos DICOM para obtener reportes estructurados instantáneos validados por nuestro sistema de Guardrails.</p>
+              <h1 className="text-4xl font-extrabold text-gray-900 mb-4">AI Radiological Analysis</h1>
+              <p className="text-lg text-gray-600">Upload DICOM files to get instant structured reports validated by our Guardrails system.</p>
             </div>
 
             {loading ? (
               <div className="flex flex-col items-center justify-center py-20">
                 <Loader2 className="h-12 w-12 text-blue-600 animate-spin mb-4" />
-                <p className="text-gray-500 font-medium">Procesando imagen médica y generando reporte...</p>
+                <p className="text-gray-500 font-medium">Processing medical image and generating report...</p>
               </div>
             ) : (
               <DicomUploader
@@ -54,7 +54,7 @@ function App() {
                 onClick={() => setAnalysisResult(null)}
                 className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
               >
-                ← Cargar otro estudio
+                ← Load another study
               </button>
             </div>
             <MedicalDashboard data={analysisResult} />

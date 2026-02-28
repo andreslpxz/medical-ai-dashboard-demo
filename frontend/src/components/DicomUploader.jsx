@@ -17,7 +17,7 @@ const DicomUploader = ({ onUploadStart, onUploadSuccess, onUploadError }) => {
                 body: formData,
             });
 
-            if (!response.ok) throw new Error('Error al analizar el archivo');
+            if (!response.ok) throw new Error('Error analyzing the file');
 
             const data = await response.json();
             onUploadSuccess(data);
@@ -40,7 +40,7 @@ const DicomUploader = ({ onUploadStart, onUploadSuccess, onUploadError }) => {
             }}
         >
             <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-            <p className="text-gray-600 mb-4">Arrastra y suelta tu archivo DICOM aquí</p>
+            <p className="text-gray-600 mb-4">Drag and drop your DICOM file here</p>
             <input
                 type="file"
                 className="hidden"
@@ -51,7 +51,7 @@ const DicomUploader = ({ onUploadStart, onUploadSuccess, onUploadError }) => {
                 htmlFor="file-upload"
                 className="bg-blue-600 text-white px-6 py-2 rounded-md cursor-pointer hover:bg-blue-700 transition-colors"
             >
-                Seleccionar Archivo
+                Select File
             </label>
         </div>
     );

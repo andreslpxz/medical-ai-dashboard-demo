@@ -4,26 +4,26 @@ import json
 
 def analyze_metadata_and_image(metadata, img_base64):
     """
-    Usa Groq (Llama Vision) para generar el reporte médico basado en metadatos e imagen.
+    Uses Groq (Llama Vision) to generate a medical report based on metadata and image.
     """
     client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
     prompt = f"""
-    Eres un radiólogo experto especializado en HealthTech. Analiza la siguiente información de un archivo DICOM.
+    You are an expert radiologist specialized in HealthTech. Analyze the following information from a DICOM file.
 
-    Metadatos:
+    Metadata:
     {json.dumps(metadata, indent=2)}
 
-    Por favor genera un reporte médico estructurado en formato JSON con los siguientes campos:
-    - Findings: (Hallazgos detallados)
-    - Impression: (Impresión diagnóstica final)
-    - Recommendations: (Recomendaciones clínicas)
+    Please generate a structured medical report in JSON format with the following fields:
+    - Findings: (Detailed findings)
+    - Impression: (Final diagnostic impression)
+    - Recommendations: (Clinical recommendations)
 
-    El reporte debe usar terminología médica/veterinaria precisa y evitar alucinaciones.
+    The report must use precise medical/veterinary terminology and avoid hallucinations.
     """
 
     response = client.chat.completions.create(
-        model="llama-3.2-11b-vision-preview",
+        model="meta-llama/llama-4-scout-17b-16e-instruct",
         messages=[
             {
                 "role": "user",
