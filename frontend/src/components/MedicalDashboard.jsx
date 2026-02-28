@@ -19,14 +19,6 @@ const MedicalDashboard = ({ data }) => {
                     </h3>
                     <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
-                            <p className="text-gray-500">Name</p>
-                            <p className="font-medium">{metadata.PatientName}</p>
-                        </div>
-                        <div>
-                            <p className="text-gray-500">ID</p>
-                            <p className="font-medium">{metadata.PatientID}</p>
-                        </div>
-                        <div>
                             <p className="text-gray-500">Modality</p>
                             <p className="font-medium">{metadata.Modality}</p>
                         </div>
@@ -44,9 +36,15 @@ const MedicalDashboard = ({ data }) => {
                         <h3 className="text-xl font-bold text-gray-800 flex items-center">
                             <Clipboard className="mr-2 text-blue-600" /> Radimal AI Insight
                         </h3>
-                        <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded flex items-center font-semibold">
-                            <ShieldCheck className="w-3 h-3 mr-1" /> Validated by Guardrail
-                        </span>
+                        {data.status === 'needs_human_review' ? (
+                            <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded flex items-center font-semibold">
+                                <Activity className="w-3 h-3 mr-1" /> Needs Human Review
+                            </span>
+                        ) : (
+                            <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded flex items-center font-semibold">
+                                <ShieldCheck className="w-3 h-3 mr-1" /> Validated by Guardrail
+                            </span>
+                        )}
                     </div>
 
                     <div className="space-y-6">
