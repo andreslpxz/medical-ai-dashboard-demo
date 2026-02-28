@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pydicom
+groq
+python-multipart
+pillow
+numpy
+python-dotenv
