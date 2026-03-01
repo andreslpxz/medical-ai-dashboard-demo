@@ -35,7 +35,7 @@ pip install -r requirements.txt
 
 ### 3. Environment Variables
 
-Create a `.env` file inside the `backend/` directory:
+Create a `.env` file inside the root:
 
 ```
 GROQ_API_KEY=your_api_key_here
